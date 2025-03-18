@@ -38,17 +38,50 @@ export const Admin = () => {
 				))}
 			</ul>
 
+import React, { useState } from 'react';
+
+interface User {
+	// Define the properties of a User here
+}
+
+const Admin: React.FC = () => {
+	const [users, setUsers] = useState<User[]>([]);
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState<string | null>(null);
+
+	const fetchUsers = async () => {
+		setIsLoading(true);
+		setError(null);
+		try {
+			const response = await fetch("/api/users", { method: "POST" });
+			if (!response.ok) {
+				throw new Error(`API responded with status: ${response.status}`);
+			}
+			const result: User[] = await response.json();
+			setUsers(result);
+		} catch (err) {
+			setError(err instanceof Error ? err.message : "Failed to fetch users");
+			console.error("Error fetching users:", err);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	return (
+		<div>
 			<button
 				type="button"
-				onClick={() =>
-					fetch("/api/users", { method: "POST" }).then(async (r) => {
-						const result: User[] = await r.json();
-						setUsers(result);
-					})
-				}
+				onClick={fetchUsers}
+				disabled={isLoading}
 			>
-				Grab all users
+				{isLoading ? "Loading..." : "Grab all users"}
 			</button>
+			{error && <p className="error">{error}</p>}
+		</div>
+	);
+};
+
+export default Admin;
 		</section>
 	);
 };
