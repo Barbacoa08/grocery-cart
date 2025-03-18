@@ -24,6 +24,8 @@
 
 		"paths": {
 			"src/*": ["./src/*"],
+			"components": ["./src/components/index.ts"],
+			"types": ["./src/types/index.ts"],
 			"test-utils": ["./test-utils"]
 		}
 	},

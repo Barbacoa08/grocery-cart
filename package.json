@@ -10,7 +10,9 @@
 		"lint": "biome ci ./src",
 		"format": "biome format --write ./src",
 		"style-check": "biome check --write ./src",
-		"dev": "vite --open",
+		"dev": "pnpm dev:clientonly",
+		"dev:clientonly": "vite --open",
+		"dev:serverless": "netlify dev",
 		"build": "tsc -b && vite build",
 		"test": "vitest run",
 		"test:watch": "vitest",
@@ -19,6 +21,7 @@
 	},
 	"dependencies": {
 		"@barbajoe/css-lib": "0.2.1",
+		"@netlify/functions": "3.0.2",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
 		"react-router-dom": "7.3.0"
@@ -30,6 +33,7 @@
 		"@testing-library/react": "16.2.0",
 		"@testing-library/user-event": "14.6.1",
 		"@types/jest-axe": "3.5.9",
+		"@types/node": "^22.13.10",
 		"@types/react": "19.0.10",
 		"@types/react-dom": "19.0.4",
 		"@vitejs/plugin-react": "4.3.4",
