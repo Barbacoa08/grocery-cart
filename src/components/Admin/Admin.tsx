@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { useGlobalContext } from "src/GlobalContext";
 
-interface User {
-	id: string;
-	username: string;
-}
+import type { User } from "src/types";
 
 export const Admin = () => {
 	const [users, setUsers] = useState<User[]>([]);
-	const { username, setUsername } = useGlobalContext();
+	const { user, setUser } = useGlobalContext();
 
 	return (
 		<section>
@@ -32,8 +29,8 @@ export const Admin = () => {
 						{u.username}{" "}
 						<button
 							type="button"
-							disabled={u.username === username}
-							onClick={() => setUsername(u.username)}
+							disabled={u.id === user?.id}
+							onClick={() => setUser(u)}
 						>
 							Use
 						</button>
@@ -50,7 +47,7 @@ export const Admin = () => {
 					})
 				}
 			>
-				Grab starting data
+				Grab all users
 			</button>
 		</section>
 	);

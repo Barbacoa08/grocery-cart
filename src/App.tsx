@@ -1,15 +1,17 @@
 import { useState } from "react";
 
+import type { User as UserType } from "./types";
+
 import { Admin, Cart, Inventory, User } from "./components";
 import { GlobalContextProvider } from "./GlobalContext";
 
 import "./App.css";
 
 export const App = () => {
-	const [username, setUsername] = useState("Unknown Name");
+	const [user, setUser] = useState<UserType | undefined>();
 
 	return (
-		<GlobalContextProvider value={{ username, setUsername }}>
+		<GlobalContextProvider value={{ user, setUser }}>
 			<header className="site-header">Shared Grocery Cart</header>
 
 			<main>

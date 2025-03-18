@@ -1,8 +1,10 @@
 import { createContext, useContext } from "react";
 
+import type { User } from "./types";
+
 export interface GlobalContextType {
-	username: string;
-	setUsername: (name: string) => void;
+	user: User | undefined;
+	setUser: (user: User) => void;
 }
 
 interface GlobalContextProviderProps {
@@ -11,8 +13,8 @@ interface GlobalContextProviderProps {
 }
 
 const GlobalContext = createContext<GlobalContextType>({
-	username: "",
-	setUsername: () => null,
+	user: undefined,
+	setUser: () => null,
 });
 
 export const GlobalContextProvider: React.FC<GlobalContextProviderProps> = ({

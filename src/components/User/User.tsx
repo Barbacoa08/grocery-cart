@@ -1,22 +1,35 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGlobalContext } from "src/GlobalContext";
 
+import type { User as UserType } from "src/types";
+
 const inputId = "username-input-id";
+const randomUsername = "random user number 8";
 
 export const User = () => {
-	const { username, setUsername } = useGlobalContext();
+	const { user, setUser } = useGlobalContext();
 
-	const [usernameInput, setUsernameInput] = useState(username);
+	const [usernameInput, setUsernameInput] = useState(
+		user?.username || randomUsername,
+	);
 	const updateUsername = useCallback(
 		(newUsername: string) => {
 			// TODO: get updated username
 			// compare with existsing username, create new one if necessary, else pull existing data
 			// update inventory based on new/existing username
 
-			setUsername(newUsername);
+			const updatedUser: UserType = {
+				id: "0",
+				username: newUsername,
+			};
+			setUser(updatedUser); // BUG: needs to be updated to be a proper User
 		},
-		[setUsername],
+		[setUser],
 	);
+
+	useEffect(() => {
+		setUsernameInput(user?.username || randomUsername);
+	}, [user]);
 
 	return (
 		<section>
