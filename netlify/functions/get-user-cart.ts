@@ -12,10 +12,9 @@ export default async (req: Request, context: Context) => {
 		const { userid } = params;
 
 		try {
+			const url = new URL(userid, GETUSERSCARTURL);
 			const resp = await (
-				const url = new URL(userid, GETUSERSCARTURL);
-				const resp = await (
-					await fetch(url.toString(), {
+				await fetch(url.toString(), {
 					headers: {
 						"Content-Type": "application/json",
 						"x-hasura-admin-secret": process.env.VITE_HASURA_ADMIN_SECRET || "",
@@ -28,15 +27,15 @@ export default async (req: Request, context: Context) => {
 			console.error("Error fetching user cart:", error);
 			return new Response(
 				JSON.stringify({ error: "Failed to fetch user cart" }),
-				{ status: 500 }
+				{ status: 500 },
 			);
 		}
 	}
 
-	return new Response(
-		JSON.stringify({ error: "Method not allowed" }),
-		{ status: 405, headers: { "Allow": "POST" } }
-	);
+	return new Response(JSON.stringify({ error: "Method not allowed" }), {
+		status: 405,
+		headers: { Allow: "POST" },
+	});
 };
 
 export const config = { path: "/api/cart" };
