@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import type { User as UserType } from "./types";
 
-import { Admin, Cart, Inventory, User } from "./components";
 import { GlobalContextProvider } from "./GlobalContext";
+import { Admin, Cart, Inventory, User } from "./components";
 
 import "./App.css";
 
