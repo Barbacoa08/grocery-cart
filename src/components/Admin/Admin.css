@@ -1,0 +1,9 @@
+.admin-page {
+  .error {
+    border: 1px red solid;
+  }
+
+  .spacer {
+    padding-left: 1rem;
+  }
+}

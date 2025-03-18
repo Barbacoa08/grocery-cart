@@ -3,6 +3,8 @@ import { useGlobalContext } from "src/GlobalContext";
 
 import type { User } from "src/types";
 
+import "./Admin.css";
+
 export const Admin = () => {
 	const [users, setUsers] = useState<User[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +30,7 @@ export const Admin = () => {
 	};
 
 	return (
-		<section>
+		<section className="admin-page">
 			<h2>Admin Tools</h2>
 
 			<h3>TODO: implement</h3>
@@ -42,13 +44,19 @@ export const Admin = () => {
 
 			<h3>Existing Users</h3>
 
-			<button type="button" onClick={fetchUsers} disabled={isLoading}>
-				{isLoading ? "Loading..." : "Grab all users"}
-			</button>
-			{error && <p className="error">{error}</p>}
+			<div>
+				<button type="button" onClick={fetchUsers} disabled={isLoading}>
+					Grab all users
+				</button>
+
+				{isLoading && <span className="spacer">Loading...</span>}
+
+				{error && <p className="error">{error}</p>}
+
+				{users.length < 1 && <p>No users</p>}
+			</div>
 
 			<ul>
-				{users.length < 1 && <li>No users</li>}
 				{users.map((u) => (
 					<li key={u.id}>
 						{u.username}{" "}
