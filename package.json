@@ -1,0 +1,48 @@
+{
+	"name": "grocery-cart",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"all": "pnpm clean && pnpm i && pnpm style-check && pnpm build && pnpm test",
+		"github": "pnpm clean && pnpm i && pnpm lint && pnpm build && pnpm test",
+		"clean": "rm -rf build dist",
+		"lint": "biome ci ./src",
+		"format": "biome format --write ./src",
+		"style-check": "biome check --write ./src",
+		"dev": "vite --open",
+		"build": "tsc -b && vite build",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@barbajoe/css-lib": "0.2.1",
+		"react": "19.0.0",
+		"react-dom": "19.0.0",
+		"react-router-dom": "7.3.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@testing-library/dom": "10.4.0",
+		"@testing-library/jest-dom": "6.6.3",
+		"@testing-library/react": "16.2.0",
+		"@testing-library/user-event": "14.6.1",
+		"@types/jest-axe": "3.5.9",
+		"@types/react": "19.0.10",
+		"@types/react-dom": "19.0.4",
+		"@vitejs/plugin-react": "4.3.4",
+		"@vitest/coverage-v8": "3.0.9",
+		"globals": "15.15.0",
+		"jest-axe": "10.0.0",
+		"jsdom": "26.0.0",
+		"typescript": "5.7.2",
+		"vite": "6.2.0",
+		"vite-tsconfig-paths": "5.1.4",
+		"vitest": "3.0.9"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": ["@biomejs/biome"]
+	}
+}
