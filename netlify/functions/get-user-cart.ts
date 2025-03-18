@@ -11,19 +11,30 @@ export default async (req: Request, context: Context) => {
 	if (req.method === "POST") {
 		const { userid } = params;
 
-		const resp = await (
-			await fetch(GETUSERSCARTURL + userid, {
-				headers: {
-					"Content-Type": "application/json",
-					"x-hasura-admin-secret": process.env.VITE_HASURA_ADMIN_SECRET || "",
-				},
-			})
-		).json();
+		try {
+			const resp = await (
+				await fetch(GETUSERSCARTURL + userid, {
+					headers: {
+						"Content-Type": "application/json",
+						"x-hasura-admin-secret": process.env.VITE_HASURA_ADMIN_SECRET || "",
+					},
+				})
+			).json();
 
-		return new Response(JSON.stringify(resp));
+			return new Response(JSON.stringify(resp));
+		} catch (error) {
+			console.error("Error fetching user cart:", error);
+			return new Response(
+				JSON.stringify({ error: "Failed to fetch user cart" }),
+				{ status: 500 }
+			);
+		}
 	}
 
-	return new Response("BAD");
+	return new Response(
+		JSON.stringify({ error: "Method not allowed" }),
+		{ status: 405, headers: { "Allow": "POST" } }
+	);
 };
 
 export const config = { path: "/api/cart" };
