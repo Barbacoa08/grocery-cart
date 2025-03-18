@@ -1,72 +1,72 @@
-import { useState } from "react";
-import viteLogo from "/vite.svg";
-
-import reactLogo from "./assets/react.svg";
-
 import "./App.css";
 
 export const App = () => {
-	const [count, setCount] = useState(0);
-
 	return (
-		<main>
-			<div>
-				<a href="https://vite.dev" target="_blank" rel="noreferrer">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
+		<>
+			<header className="site-header">Shared Grocery Cart</header>
 
-				<a href="https://react.dev" target="_blank" rel="noreferrer">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
+			<main>
+				<h1>Your Shopping Cart</h1>
 
-			<h1>Vite + React</h1>
+				<section>
+					<h2>User Info</h2>
 
-			<div className="card">
-				<button type="button" onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
+					<p>TODO: implement</p>
 
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
+					<ul>
+						<li>show user's username and allow them to update it</li>
+						<li>DO ALLOW multiple sessions to use the same username</li>
+						<li>query for existing user</li>
+						<li>if this user exists, pull their data</li>
+						<li>
+							if this user DOES NOT exist, create new user when users submits
+							username, or adds any item to their cart (make up random name)
+						</li>
+					</ul>
+				</section>
 
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
-		</main>
+				<section>
+					<h2>Admin Tools</h2>
+
+					<p>TODO: implement</p>
+
+					<ul>
+						<li>
+							add more inventory (too an upper of individual and total stock)
+						</li>
+						<li>remove inventory</li>
+						<li>reset inventory</li>
+						<li>impersonate any user (show full list of users)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Available Inventory</h2>
+
+					<p>TODO: show available inventory</p>
+
+					<ul>
+						<li>allow adding items to cart</li>
+						<li>add/remove items from cart</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Current Shopping Cart data</h2>
+
+					<button
+						type="button"
+						onClick={() =>
+							fetch("/api/cart", { method: "POST" }).then(async (r) => {
+								const result = await r.json();
+								console.log(result);
+							})
+						}
+					>
+						Grab starting data
+					</button>
+				</section>
+			</main>
+		</>
 	);
 };
-
-// <section>
-// <h2>Hasura endpoints</h2>
-
-// <button
-// 	type="button"
-// 	onClick={() =>
-// 		fetch("https://shopping-cart.hasura.app/api/rest/getstartingdata", {
-// 			headers: {
-// 				"Content-Type": "application/json",
-// 				"x-hasura-admin-secret": import.meta.env
-// 					.VITE_HASURA_ADMIN_SECRET, // TODO: DO NOT put this on the client, put it on the server you fool!
-// 			},
-// 		}).then(async (r) => {
-// 			const result = (await r.json()).cart[0].items.replaceAll(
-// 				"'",
-// 				'"',
-// 			);
-
-// 			console.log(result);
-// 			console.log(typeof result);
-// 			console.log(JSON.parse(result));
-// 			// const items = JSON.parse(result);
-// 			// console.log("parsed items", items);
-
-// 			setStartingData(result);
-// 		})
-// 	}
-// >
-// 	Grab starting data
-// </button>
-// </section>
