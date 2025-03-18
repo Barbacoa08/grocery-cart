@@ -14,7 +14,7 @@ export const Cart = () => {
 					})
 				}
 			>
-				Grab starting data
+				Grab my cart data
 			</button>
 		</section>
 	);
