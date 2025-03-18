@@ -1,9 +1,9 @@
 .admin-page {
-  .error {
-    border: 1px red solid;
-  }
+	.error {
+		border: 1px red solid;
+	}
 
-  .spacer {
-    padding-left: 1rem;
-  }
+	.spacer {
+		padding-left: 1rem;
+	}
 }
