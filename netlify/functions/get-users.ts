@@ -1,17 +1,9 @@
-import type { Config, Context } from "@netlify/functions";
-
-const GETUSERSCARTURL =
-	"https://shopping-cart.hasura.app/api/rest/getusercart/";
 const GETUSERSURL = "https://shopping-cart.hasura.app/api/rest/getusers/";
 
 // route: BASEURL/api/cart
 // example: GET https://deploy-preview-10--react-vite-base.netlify.app/api/cart
-export default async (req: Request, context: Context) => {
-	const { params } = context;
-
+export default async (req: Request) => {
 	if (req.method === "POST") {
-		// const { city, country } = params;
-
 		const resp = await (
 			await fetch(GETUSERSURL, {
 				headers: {
@@ -21,10 +13,10 @@ export default async (req: Request, context: Context) => {
 			})
 		).json();
 
-		return new Response(JSON.stringify(resp));
+		return new Response(JSON.stringify(resp.user || []));
 	}
 
 	return new Response("BAD");
 };
 
-export const config = { path: "/api/cart" };
+export const config = { path: "/api/users" };
