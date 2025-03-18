@@ -12,7 +12,8 @@ export default async (req: Request) => {
 					await fetch(GETUSERSURL, {
 						headers: {
 							"Content-Type": "application/json",
-							"x-hasura-admin-secret": process.env.VITE_HASURA_ADMIN_SECRET || "",
+							"x-hasura-admin-secret":
+								process.env.VITE_HASURA_ADMIN_SECRET || "",
 						},
 					})
 				).json()
@@ -20,33 +21,27 @@ export default async (req: Request) => {
 
 			return new Response(JSON.stringify(resp || []), {
 				headers: {
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
 				},
-				status: 200
+				status: 200,
 			});
 		} catch (error) {
 			console.error("Error fetching users:", error);
-			return new Response(
-				JSON.stringify({ error: "Failed to fetch users" }),
-				{
-					headers: {
-						"Content-Type": "application/json"
-					},
-					status: 500
-				}
-			);
+			return new Response(JSON.stringify({ error: "Failed to fetch users" }), {
+				headers: {
+					"Content-Type": "application/json",
+				},
+				status: 500,
+			});
 		}
 	}
 
-	return new Response(
-		JSON.stringify({ error: "Method not allowed" }),
-		{
-			headers: {
-				"Content-Type": "application/json"
-			},
-			status: 405
-		}
-	);
+	return new Response(JSON.stringify({ error: "Method not allowed" }), {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		status: 405,
+	});
 };
 
 export const config = { path: "/api/users" };
