@@ -21,8 +21,6 @@ export default async (req: Request, context: Context) => {
 			})
 		).json();
 
-		console.log(resp);
-
 		return new Response(JSON.stringify(resp));
 	}
 
