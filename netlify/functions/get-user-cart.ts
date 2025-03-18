@@ -10,7 +10,19 @@ export default async (req: Request, context: Context) => {
 
 	if (req.method === "POST") {
 		const { userid } = params;
-
+		
+		if (!userid) {
+			return new Response(
+				JSON.stringify({ error: "Missing userid parameter" }),
+				{ 
+					status: 400,
+					headers: { "Content-Type": "application/json" }
+				}
+			);
+		}
+		
+		// ... rest of the code that handles the POST request
+	}
 		try {
 			const url = new URL(userid, GETUSERSCARTURL);
 			const resp = await (
