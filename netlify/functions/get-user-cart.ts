@@ -13,7 +13,9 @@ export default async (req: Request, context: Context) => {
 
 		try {
 			const resp = await (
-				await fetch(GETUSERSCARTURL + userid, {
+				const url = new URL(userid, GETUSERSCARTURL);
+				const resp = await (
+					await fetch(url.toString(), {
 					headers: {
 						"Content-Type": "application/json",
 						"x-hasura-admin-secret": process.env.VITE_HASURA_ADMIN_SECRET || "",
