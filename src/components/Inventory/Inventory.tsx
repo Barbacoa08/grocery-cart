@@ -80,6 +80,15 @@ export const Inventory = () => {
 				{isLoading && <span className="spacer">Loading...</span>}
 
 				{error && <p className="error">{error}</p>}
+
+				{user === undefined && (
+					<div>
+						Become admin:{" "}
+						<button type="button" onClick={() => updateUsername("barbajoe")}>
+							barbajoe
+						</button>
+					</div>
+				)}
 			</section>
 
 			<section>
