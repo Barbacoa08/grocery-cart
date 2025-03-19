@@ -9,7 +9,7 @@
 		cursor: pointer;
 	}
 
-	.selection {
+	/* .selection {
 		display: flex;
 		justify-content: space-between;
 
@@ -18,5 +18,5 @@
 
 			--plus-border-color: green;
 		}
-	}
+	} */
 }
