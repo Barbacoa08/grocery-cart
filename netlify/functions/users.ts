@@ -5,7 +5,6 @@ const GETUSERSURL = "https://shopping-cart.hasura.app/api/rest/getusers/";
 
 export default async (req: Request) => {
 	const { method } = req;
-	console.log("method:", method);
 
 	switch (method) {
 		case "GET":
@@ -21,8 +20,6 @@ export default async (req: Request) => {
 						})
 					).json()
 				).user;
-
-				console.log({ resp });
 
 				return new Response(JSON.stringify(resp || []), {
 					headers: {

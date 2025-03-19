@@ -30,7 +30,6 @@ export const User = () => {
 				}
 
 				const updatedUser: UserType = await response.json();
-				console.log({ updatedUser });
 				setUser(updatedUser);
 			} catch (err) {
 				// setError(err instanceof Error ? err.message : "Failed to fetch users");
