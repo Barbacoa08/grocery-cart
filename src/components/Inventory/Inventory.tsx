@@ -81,7 +81,7 @@ export const Inventory = () => {
 
 				{error && <p className="error">{error}</p>}
 
-				{user === undefined && (
+				{user === undefined && !isLoading && (
 					<div>
 						Become admin:{" "}
 						<button type="button" onClick={() => updateUsername("barbajoe")}>
