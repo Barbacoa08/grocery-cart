@@ -55,7 +55,7 @@ export const Admin = () => {
 
 			<div>
 				<button type="button" onClick={fetchUsers} disabled={isLoading}>
-					Grab all users
+					Re-get all users
 				</button>
 
 				{isLoading && <span className="spacer">Loading...</span>}

@@ -3,31 +3,64 @@ import { useGlobalContext } from "src/GlobalContext";
 
 import type { UserCartItem } from "src/types";
 
+import "./Cart.css";
+
 export const Cart = () => {
 	const { user } = useGlobalContext();
 	const [cart, setCart] = useState<UserCartItem[]>([]);
 
 	useEffect(() => {
-		fetch(`/api/cart/${user?.id}`).then(async (r) => {
-			const result: UserCartItem[] = await r.json();
+		if (user?.id) {
+			fetch(`/api/cart/${user?.id}`).then(async (r) => {
+				const result: UserCartItem[] = await r.json();
 
-			setCart(result);
-		});
+				setCart(result);
+			});
+		} else {
+			setCart([]);
+		}
 	}, [user]);
 
 	return (
-		<section>
-			<h2>Current Shopping Cart data</h2>
+		<section className="cart-page">
+			<h2>Checkout area</h2>
 
 			<section>
-				{cart.length === 0 && <div>Nothing in your cart... yet!</div>}
-
 				{cart.map((item) => (
-					<div key={item.id}>
-						<span>{item.name}</span>
-						<span>{item.taken}</span>
+					<div key={`checkout-${item.name}`}>
+						<span>{`${item.name}: ${item.taken} in Cart`}</span>
+
+						<button
+							className="icon-button"
+							type="button"
+							aria-label={`remove one ${item.name}`}
+							// onClick={() => handleReduceFromCart(item.name)}
+						>
+							➖
+						</button>
+
+						<button
+							className="icon-button"
+							type="button"
+							aria-label={`remove all ${item.name}`}
+							// onClick={() => handleRemoveFromCart(item.name)}
+						>
+							❌
+						</button>
 					</div>
 				))}
+
+				<div>
+					<h3>{cart.length ? "Complete checkout?" : "No items selected"}</h3>
+
+					<button
+						type="button"
+						disabled={cart.length === 0}
+						// onClick={handleCheckout}
+					>
+						submit checkout
+					</button>
+				</div>
 			</section>
 		</section>
 	);
