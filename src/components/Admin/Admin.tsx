@@ -6,21 +6,22 @@ import type { User } from "src/types";
 import "./Admin.css";
 
 export const Admin = () => {
-	const [users, setUsers] = useState<User[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+
 	const { user, setUser } = useGlobalContext();
+	const { allUsers, setAllUsers } = useGlobalContext();
 
 	const fetchUsers = async () => {
 		setIsLoading(true);
 		setError(null);
 		try {
-			const response = await fetch("/api/users");
+			const response = await fetch("/api/user");
 			if (!response.ok) {
 				throw new Error(`API responded with status: ${response.status}`);
 			}
 			const result: User[] = await response.json();
-			setUsers(result);
+			setAllUsers(result);
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "Failed to fetch users");
 			console.error("Error fetching users:", err);
@@ -53,11 +54,11 @@ export const Admin = () => {
 
 				{error && <p className="error">{error}</p>}
 
-				{users.length < 1 && <p>No users</p>}
+				{allUsers.length < 1 && <p>No users</p>}
 			</div>
 
 			<ul>
-				{users.map((u) => (
+				{allUsers.map((u) => (
 					<li key={u.id}>
 						{u.username}{" "}
 						<button

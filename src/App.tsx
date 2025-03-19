@@ -9,9 +9,10 @@ import "./App.css";
 
 export const App = () => {
 	const [user, setUser] = useState<UserType | undefined>();
+	const [allUsers, setAllUsers] = useState<UserType[]>([]);
 
 	return (
-		<GlobalContextProvider value={{ user, setUser }}>
+		<GlobalContextProvider value={{ user, setUser, allUsers, setAllUsers }}>
 			<header className="site-header">Shared Grocery Cart</header>
 
 			<main>
