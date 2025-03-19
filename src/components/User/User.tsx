@@ -62,7 +62,11 @@ export const User = () => {
 				/>
 
 				<div>
-					<button type="button" onClick={() => updateUsername(usernameInput)}>
+					<button
+						type="button"
+						onClick={() => updateUsername(usernameInput)}
+						disabled={user?.username === usernameInput}
+					>
 						Set Username
 					</button>
 

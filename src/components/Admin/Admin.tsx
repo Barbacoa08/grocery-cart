@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGlobalContext } from "src/GlobalContext";
 
 import type { User } from "src/types";
@@ -12,7 +12,7 @@ export const Admin = () => {
 	const { user, setUser } = useGlobalContext();
 	const { allUsers, setAllUsers } = useGlobalContext();
 
-	const fetchUsers = async () => {
+	const fetchUsers = useCallback(async () => {
 		setIsLoading(true);
 		setError(null);
 		try {
@@ -28,7 +28,11 @@ export const Admin = () => {
 		} finally {
 			setIsLoading(false);
 		}
-	};
+	}, [setAllUsers]);
+
+	useEffect(() => {
+		fetchUsers();
+	}, [fetchUsers]);
 
 	return (
 		<section className="admin-page">
