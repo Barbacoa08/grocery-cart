@@ -1,15 +1,15 @@
 .cart-page {
-  --icon-button-border-color: yellow;
+	--icon-button-border-color: yellow;
 
-  .icon-button {
-    background: none;
-    border: 1px solid var(--icon-button-border-color);
-    margin: 0.5rem;
-    font: inherit;
-    cursor: pointer;
-  }
+	.icon-button {
+		background: none;
+		border: 1px solid var(--icon-button-border-color);
+		margin: 0.5rem;
+		font: inherit;
+		cursor: pointer;
+	}
 
-  /* .selection {
+	/* .selection {
 		display: flex;
 		justify-content: space-between;
 
