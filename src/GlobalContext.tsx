@@ -5,6 +5,9 @@ import type { User } from "./types";
 export interface GlobalContextType {
 	user: User | undefined;
 	setUser: (user: User) => void;
+
+	allUsers: User[];
+	setAllUsers: (user: User[]) => void;
 }
 
 interface GlobalContextProviderProps {
@@ -15,6 +18,9 @@ interface GlobalContextProviderProps {
 const GlobalContext = createContext<GlobalContextType>({
 	user: undefined,
 	setUser: () => null,
+
+	allUsers: [],
+	setAllUsers: () => null,
 });
 
 export const GlobalContextProvider: React.FC<GlobalContextProviderProps> = ({

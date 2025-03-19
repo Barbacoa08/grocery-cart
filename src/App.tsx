@@ -3,27 +3,28 @@ import { useState } from "react";
 import type { User as UserType } from "./types";
 
 import { GlobalContextProvider } from "./GlobalContext";
-import { Admin, Cart, Inventory, User } from "./components";
+import { Admin, Cart, Inventory } from "./components";
 
 import "./App.css";
 
+const adminusername = "barbajoe";
+
 export const App = () => {
 	const [user, setUser] = useState<UserType | undefined>();
+	const [allUsers, setAllUsers] = useState<UserType[]>([]);
 
 	return (
-		<GlobalContextProvider value={{ user, setUser }}>
+		<GlobalContextProvider value={{ user, setUser, allUsers, setAllUsers }}>
 			<header className="site-header">Shared Grocery Cart</header>
 
 			<main>
 				<h1>Your Shopping Cart</h1>
 
-				<User />
-
 				<Inventory />
 
 				<Cart />
 
-				<Admin />
+				{user?.username === adminusername && <Admin />}
 			</main>
 		</GlobalContextProvider>
 	);

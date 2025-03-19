@@ -1,0 +1,21 @@
+.inventory-page {
+	.username-input-container {
+		display: grid;
+
+		grid-template:
+			"a b b"
+			"c c c";
+
+		.input-label {
+			grid-area: a;
+		}
+
+		.input-text {
+			grid-area: b;
+		}
+
+		.input-button {
+			grid-area: c;
+		}
+	}
+}

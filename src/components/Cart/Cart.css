@@ -1,0 +1,22 @@
+.cart-page {
+	--icon-button-border-color: yellow;
+
+	.icon-button {
+		background: none;
+		border: 1px solid var(--icon-button-border-color);
+		margin: 0.5rem;
+		font: inherit;
+		cursor: pointer;
+	}
+
+	/* .selection {
+		display: flex;
+		justify-content: space-between;
+
+		.grocery-type {
+			min-width: 300px;
+
+			--icon-button-border-color: green;
+		}
+	} */
+}
