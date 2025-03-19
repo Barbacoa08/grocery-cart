@@ -7,6 +7,9 @@ const inputId = "username-input-id";
 const randomUsername = "random user number 8";
 
 export const User = () => {
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState<string | null>(null);
+
 	const { user, setUser } = useGlobalContext();
 
 	const [usernameInput, setUsernameInput] = useState(
@@ -18,8 +21,8 @@ export const User = () => {
 			// compare with existsing username, create new one if necessary, else pull existing data
 			// update inventory based on new/existing username
 
-			// setIsLoading(true);
-			// setError(null);
+			setIsLoading(true);
+			setError(null);
 			try {
 				const response = await fetch(`/api/user/${newUsername}`, {
 					method: "POST",
@@ -32,10 +35,10 @@ export const User = () => {
 				const updatedUser: UserType = await response.json();
 				setUser(updatedUser);
 			} catch (err) {
-				// setError(err instanceof Error ? err.message : "Failed to fetch users");
+				setError(err instanceof Error ? err.message : "Failed to set user");
 				console.error("Error fetching users:", err);
 			} finally {
-				// setIsLoading(false);
+				setIsLoading(false);
 			}
 		},
 		[setUser],
@@ -58,9 +61,15 @@ export const User = () => {
 					onChange={(e) => setUsernameInput(e.currentTarget.value)}
 				/>
 
-				<button type="button" onClick={() => updateUsername(usernameInput)}>
-					Update Username
-				</button>
+				<div>
+					<button type="button" onClick={() => updateUsername(usernameInput)}>
+						Set Username
+					</button>
+
+					{isLoading && <span className="spacer">Loading...</span>}
+
+					{error && <p className="error">{error}</p>}
+				</div>
 			</section>
 
 			<p>TODO: implement</p>
