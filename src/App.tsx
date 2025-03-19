@@ -3,9 +3,11 @@ import { useState } from "react";
 import type { User as UserType } from "./types";
 
 import { GlobalContextProvider } from "./GlobalContext";
-import { Admin, Cart, Inventory, User } from "./components";
+import { Admin, Cart, Inventory } from "./components";
 
 import "./App.css";
+
+const adminusername = "barbajoe";
 
 export const App = () => {
 	const [user, setUser] = useState<UserType | undefined>();
@@ -18,13 +20,11 @@ export const App = () => {
 			<main>
 				<h1>Your Shopping Cart</h1>
 
-				<User />
-
 				<Inventory />
 
 				<Cart />
 
-				<Admin />
+				{user?.username === adminusername && <Admin />}
 			</main>
 		</GlobalContextProvider>
 	);

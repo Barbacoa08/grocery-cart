@@ -21,14 +21,18 @@ export const Admin = () => {
 				throw new Error(`API responded with status: ${response.status}`);
 			}
 			const result: User[] = await response.json();
+
 			setAllUsers(result);
+			if (result.length) {
+				setUser(result[0]);
+			}
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "Failed to fetch users");
 			console.error("Error fetching users:", err);
 		} finally {
 			setIsLoading(false);
 		}
-	}, [setAllUsers]);
+	}, [setAllUsers, setUser]);
 
 	useEffect(() => {
 		fetchUsers();
