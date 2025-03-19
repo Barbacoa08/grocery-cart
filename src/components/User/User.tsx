@@ -13,16 +13,31 @@ export const User = () => {
 		user?.username || randomUsername,
 	);
 	const updateUsername = useCallback(
-		(newUsername: string) => {
+		async (newUsername: string) => {
 			// TODO: get updated username
 			// compare with existsing username, create new one if necessary, else pull existing data
 			// update inventory based on new/existing username
 
-			const updatedUser: UserType = {
-				id: "0",
-				username: newUsername,
-			};
-			setUser(updatedUser); // BUG: needs to be updated to be a proper User
+			// setIsLoading(true);
+			// setError(null);
+			try {
+				const response = await fetch(`/api/user/${newUsername}`, {
+					method: "POST",
+				});
+
+				if (!response.ok) {
+					throw new Error(`API responded with status: ${response.status}`);
+				}
+
+				const updatedUser: UserType = await response.json();
+				console.log({ updatedUser });
+				setUser(updatedUser);
+			} catch (err) {
+				// setError(err instanceof Error ? err.message : "Failed to fetch users");
+				console.error("Error fetching users:", err);
+			} finally {
+				// setIsLoading(false);
+			}
 		},
 		[setUser],
 	);

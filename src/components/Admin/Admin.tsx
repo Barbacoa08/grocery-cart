@@ -15,7 +15,7 @@ export const Admin = () => {
 		setIsLoading(true);
 		setError(null);
 		try {
-			const response = await fetch("/api/users", { method: "POST" });
+			const response = await fetch("/api/users");
 			if (!response.ok) {
 				throw new Error(`API responded with status: ${response.status}`);
 			}
